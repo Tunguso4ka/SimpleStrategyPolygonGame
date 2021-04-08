@@ -20,10 +20,29 @@ namespace MangoStrategy
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public GamePage _GamePage;
+        ConsoleClass _ConsoleClass = new ConsoleClass();
+
         public MainWindow()
         {
             InitializeComponent();
+            SettingsApply();
+
+            // a
+            Frame0.Navigate(_GamePage);
+            // a
+        }
+
+        void SettingsApply()
+        {
             ChangeTheme();
+            Pages();
+        }
+
+        void Pages()
+        {
+            _GamePage = new GamePage();
         }
 
         void ChangeTheme()
@@ -103,8 +122,12 @@ namespace MangoStrategy
             }
             else if ((string)ClickedButton.Tag == "EnterConsole")
             {
-                
+                if(ConsoleTextBox.Text.Length > 0)
+                {
+                    _ConsoleClass.Recieved(this, ConsoleTextBox.Text);
+                }
             }
         }
+
     }
 }

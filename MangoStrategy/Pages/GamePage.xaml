@@ -1,0 +1,22 @@
+﻿<Page x:Class="MangoStrategy.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+      xmlns:local="clr-namespace:MangoStrategy"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="GamePage">
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0, 20, 0, 0">
+            <Image Name="MapImage" Source="/Material/Europe_polar_stereographic_Caucasus_Urals_boundary.svg.png" Height="720" Width="1280"/>
+
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
+            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minus" Name="MinusScrollBtn" ToolTip="Minus"/>
+        </StackPanel>
+    </Grid>
+</Page>
