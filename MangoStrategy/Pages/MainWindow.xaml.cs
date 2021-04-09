@@ -22,6 +22,7 @@ namespace MangoStrategy
     {
 
         public GamePage _GamePage;
+        public MainWindow _this;
         ConsoleClass _ConsoleClass = new ConsoleClass();
 
         public MainWindow()
@@ -42,8 +43,9 @@ namespace MangoStrategy
 
         void Pages()
         {
-            _GamePage = new GamePage();
-        }
+            _this = this;
+            _GamePage = new GamePage(_this);
+    }
 
         void ChangeTheme()
         {
@@ -70,7 +72,7 @@ namespace MangoStrategy
                 }
                 catch
                 {
-
+                    
                 }
             }
             else if ((string)ClickedButton.Tag == "Minimize")
@@ -124,7 +126,14 @@ namespace MangoStrategy
             {
                 if(ConsoleTextBox.Text.Length > 0)
                 {
-                    _ConsoleClass.Recieved(this, ConsoleTextBox.Text);
+                    _ConsoleClass.Recieved(_this, ConsoleTextBox.Text);
+                }
+            }
+            else if ((string)ClickedButton.Tag == "TabConsole")
+            {
+                if (ConsoleTextBox.Text.Length > 0)
+                {
+                    //_ConsoleClass.Sort(_this, ConsoleTextBox.Text);
                 }
             }
         }

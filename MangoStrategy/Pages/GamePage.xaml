@@ -11,12 +11,20 @@
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0, 20, 0, 0">
-            <Image Name="MapImage" Source="/Material/Europe_polar_stereographic_Caucasus_Urals_boundary.svg.png" Height="720" Width="1280"/>
-
+            <Viewbox Name="MapViewbox" Stretch="Fill" MouseDown="MapViewbox_MouseDown">
+                <Grid>
+                    <Image Name="MapImage" Source="/Material/Europe.png" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Canvas x:Name="MapCanvas" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Ellipse Fill="Red" Height="15" Width="15" Canvas.Top="250" Canvas.Left="700"/>
+                    </Canvas>
+                </Grid>
+            </Viewbox>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
             <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minus" Name="MinusScrollBtn" ToolTip="Minus"/>
+            <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Minimum="25" Maximum="200"/>
+            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
+            <TextBlock Name="XYMousePosTextBlock" Text="Click to set new position."/>
         </StackPanel>
     </Grid>
 </Page>

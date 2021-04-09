@@ -20,9 +20,17 @@ namespace MangoStrategy
     /// </summary>
     public partial class GamePage : Page
     {
-        public GamePage()
+        List<Ellipse> Ellipses = new List<Ellipse>();
+        MainWindow _this;
+        Point _Point;
+        bool PointChanged;
+
+        public GamePage(MainWindow Recived_this)
         {
             InitializeComponent();
+            _this = Recived_this;
+            AddCity(50, 100, Brushes.Red);
+            AddCity(1000, 1000, Brushes.Red);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -30,20 +38,72 @@ namespace MangoStrategy
             Button ClickedButton = (Button)sender;
             if ((string)ClickedButton.Tag == "Plus")
             {
-                if (MapImage.Height < 5760)
+                if (MapImage.Height < 4000)
                 {
-                    MapImage.Height *= 1.5;
-                    MapImage.Width *= 1.5;
+
                 }
             }
             else if ((string)ClickedButton.Tag == "Minus")
             {
                 if (MapImage.Height > 720)
                 {
-                    MapImage.Height /= 1.5;
-                    MapImage.Width /= 1.5;
+
                 }
             }
+        }
+
+        public void AddCity(int X, int Y, Brush CountryBrush)
+        {
+            Ellipse _Ellipse = new Ellipse();
+            _Ellipse.Fill = CountryBrush;
+            _Ellipse.Width = 15;
+            _Ellipse.Height = 15;
+            Canvas.SetLeft(_Ellipse, X);
+            Canvas.SetTop(_Ellipse, Y);
+
+            MapCanvas.Children.Add(_Ellipse);
+
+            Ellipses.Add(_Ellipse);
+
+            _this.ConsoleTextBox.Text = "New City added in X: " + Convert.ToString(X) + " Y: " + Convert.ToString(Y);
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider _Slider = (Slider)sender;
+
+            MapViewbox.Height = 23 * _Slider.Value;
+            MapViewbox.Width = 35 * _Slider.Value;
+
+            MapCanvas.Children.Clear();
+            
+            for (int i = 0; i < Ellipses.Count; i++)
+            {
+                Ellipse _Ellipse = Ellipses[i];
+                _Ellipse.Height = 0.2 * _Slider.Value;
+                _Ellipse.Width = 0.2 * _Slider.Value;
+                MapCanvas.Children.Add(_Ellipse);
+            }
+        }
+
+        private void MapViewbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _Point = e.GetPosition(MapCanvas);
+            XYMousePosTextBlock.Text = " _Point X:" + _Point.X + " Y:" + _Point.Y;
+        }
+
+        public async void AddCityByClick(Brush CountryBrush)
+        {
+            PointChanged = false;
+            int i = 50;
+            while(i != 0)
+            {
+                await Task.Delay(100);
+                _this.ConsoleTextBox.Text = "Click on Map. Time: " + Convert.ToString(i) + " X:" + _Point.X + " Y:" + _Point.Y;
+                i--;
+            }
+
+            AddCity((int)_Point.X, (int)_Point.Y, CountryBrush);
         }
     }
 }

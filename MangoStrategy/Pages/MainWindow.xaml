@@ -22,11 +22,12 @@
             <StackPanel Orientation="Horizontal">
                 <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Back" Name="BackBtn" ToolTip="Back"/>
                 <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="ShowConsole" Name="ShowConsoleBtn" ToolTip="Show Console"/>
-                <Grid Width="500" Name="ConsoleGrid" Visibility="Collapsed">
-                    <TextBox HorizontalAlignment="Stretch" Name="ConsoleTextBox"/>
+                <Grid Width="500" Name="ConsoleGrid" Visibility="Visible">
+                    <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="TabConsole" Name="TabConsoleBtn" HorizontalAlignment="Left" ToolTip="Tab"/>
+                    <TextBox HorizontalAlignment="Stretch" Name="ConsoleTextBox" Margin="30, 0, 30, 0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="ClearConsole" Name="ClearConsoleBtn" HorizontalAlignment="Left" ToolTip="Clear Console"/>
-                        <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="EnterConsole" Name="EnterConsoleBtn" HorizontalAlignment="Left" ToolTip="Enter Console"/>
+                        <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="EnterConsole" Name="EnterConsoleBtn" HorizontalAlignment="Left" ToolTip="Enter Console"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
