@@ -109,7 +109,7 @@ namespace MangoStrategy
                 else if (ConsoleRequest[1].Equals("Map", StringComparison.OrdinalIgnoreCase))
                 {
 
-                    RecMainWindow.ConsoleTextBox.Text = "Variants: Map AddCity (X) (Y) (Brush); Map AddCityByClick (Brush);";
+                    RecMainWindow.ConsoleTextBox.Text = "Variants: Map AddCity (X) (Y) (Brush); Map AddCityByClick (Brush); Map AddPath (X0) (Y0) (X1) (Y1) (Brush); Map AddPathByClick (Brush);";
                 }
 
 
@@ -136,7 +136,7 @@ namespace MangoStrategy
                     }
                     else
                     {
-
+                        RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
                     }
                 }
 
@@ -148,7 +148,31 @@ namespace MangoStrategy
                     }
                     else
                     {
+                        RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
+                    }
+                }
 
+                else if (ConsoleRequest[1].Equals("AddPath", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ConsoleRequest.Length > 5)
+                    {
+                        RecMainWindow._GamePage.AddPath(Convert.ToInt32(ConsoleRequest[2]), Convert.ToInt32(ConsoleRequest[3]), Convert.ToInt32(ConsoleRequest[4]), Convert.ToInt32(ConsoleRequest[5]), Brushes.Red);
+                    }
+                    else
+                    {
+                        RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
+                    }
+                }
+
+                else if (ConsoleRequest[1].Equals("AddPathByClick", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ConsoleRequest.Length > 2)
+                    {
+                        RecMainWindow._GamePage.AddPathByClick(Brushes.Red);
+                    }
+                    else
+                    {
+                        RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
                     }
                 }
 

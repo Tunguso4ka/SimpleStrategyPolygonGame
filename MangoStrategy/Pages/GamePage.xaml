@@ -15,7 +15,7 @@
                 <Grid>
                     <Image Name="MapImage" Source="/Material/Europe.png" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <Canvas x:Name="MapCanvas" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <Ellipse Fill="Red" Height="15" Width="15" Canvas.Top="250" Canvas.Left="700"/>
+                        
                     </Canvas>
                 </Grid>
             </Viewbox>
