@@ -141,5 +141,15 @@
   <ItemGroup>
     <Resource Include="Material\europe.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Material\Provinces\1.png" />
+    <Resource Include="Material\Provinces\3.png" />
+    <Resource Include="Material\Provinces\4.png" />
+    <Resource Include="Material\Provinces\5.png" />
+    <Resource Include="Material\Provinces\6.png" />
+    <Resource Include="Material\Provinces\7.png" />
+    <Resource Include="Material\Provinces\8.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
