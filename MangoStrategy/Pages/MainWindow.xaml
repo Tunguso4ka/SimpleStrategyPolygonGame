@@ -16,6 +16,7 @@
         Width="1280"
         MaxHeight="1440"
         MaxWidth="2160"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
     <Grid>
         <Grid Name="TabBar" Height="20" VerticalAlignment="Top">

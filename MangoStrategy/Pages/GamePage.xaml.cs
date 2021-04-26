@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,57 @@ namespace MangoStrategy
     public partial class GamePage : Page
     {
         List<Ellipse> Ellipses = new List<Ellipse>();
-        List<Path> Paths = new List<Path>();
+        List<System.Windows.Shapes.Path> Paths = new List<System.Windows.Shapes.Path>();
         MainWindow _this;
         Point _Point;
+        int TimeMode = -1;
+        int Hour = 0, Day = 1, Month = 1, Year = 2000;
 
         public GamePage(MainWindow Recived_this)
         {
             InitializeComponent();
             _this = Recived_this;
-            AddCity(720, 230, Brushes.Red);
-            AddCity(1000, 1000, Brushes.Red);
-            AddPath(634, 202, 619, 216, Brushes.Red);
+            LoadProvince(0);
+            GameTime();
+        }
+
+        public async void GameTime()
+        {
+            while (TimeMode != -2)
+            {
+                if (TimeMode == -1)
+                {
+                    await Task.Delay(100);
+                }
+                else if (TimeMode == 0)
+                {
+                    Hour++;
+                    await Task.Delay(500);
+                }
+                else
+                {
+                    Hour++;
+                    await Task.Delay(250);
+                }
+
+                if (Hour == 24)
+                {
+                    Hour = 0;
+                    Day++;
+                }
+                if (Day == 31)
+                {
+                    Day = 1;
+                    Month++;
+                }
+                if (Month == 13)
+                {
+                    Month = 1;
+                    Year++;
+                }
+
+                TimeTextBlock.Text = Hour + ":00 " + Day + "." + Month + "." + Year;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,17 +80,39 @@ namespace MangoStrategy
             Button ClickedButton = (Button)sender;
             if ((string)ClickedButton.Tag == "Plus")
             {
-                if (MapImage.Height < 4000)
+                if (MapSlider.Value + 10 <= MapSlider.Maximum)
                 {
-
+                    MapSlider.Value += 10;
                 }
             }
             else if ((string)ClickedButton.Tag == "Minus")
             {
-                if (MapImage.Height > 720)
+                if (MapSlider.Value - 10 >= MapSlider.Minimum)
                 {
-
+                    MapSlider.Value -= 10;
                 }
+            }
+
+            else if ((string)ClickedButton.Tag == "PauseTime")
+            {
+                ExtraTimeBtn.FontSize = 12;
+                NormalTimeBtn.FontSize = 12;
+                PauseTimeBtn.FontSize = 18;
+                TimeMode = -1;
+            }
+            else if ((string)ClickedButton.Tag == "NormalTime")
+            {
+                ExtraTimeBtn.FontSize = 12;
+                NormalTimeBtn.FontSize = 18;
+                PauseTimeBtn.FontSize = 12;
+                TimeMode = 0;
+            }
+            else if ((string)ClickedButton.Tag == "ExtraTime")
+            {
+                ExtraTimeBtn.FontSize = 18;
+                NormalTimeBtn.FontSize = 12;
+                PauseTimeBtn.FontSize = 12;
+                TimeMode = 1;
             }
         }
 
@@ -87,7 +150,7 @@ namespace MangoStrategy
             }
             for (int i = 0; i < Paths.Count; i++)
             {
-                Path _Path = Paths[i];
+                System.Windows.Shapes.Path _Path = Paths[i];
                 MapCanvas.Children.Add(_Path);
             }
         }
@@ -126,7 +189,7 @@ namespace MangoStrategy
 
         public void AddPath(int X0, int Y0, int X1, int Y1, Brush CountryBrush)
         {
-            Path _Path = new Path();
+            System.Windows.Shapes.Path _Path = new System.Windows.Shapes.Path();
             _Path.Stroke = CountryBrush;
             _Path.StrokeThickness = 2;
             Geometry _Geometry = Geometry.Parse("M " + Convert.ToString(X0) + "," + Convert.ToString(Y0) + " " + Convert.ToString(X1) + "," + Convert.ToString(Y1));
@@ -137,6 +200,38 @@ namespace MangoStrategy
             Paths.Add(_Path);
 
             _this.ConsoleTextBox.Text = "Map AddPath " + Convert.ToString(X1) + " " + Convert.ToString(Y1);
+        }
+
+        public async void LoadProvince(int ProvinceNum)
+        {
+            StreamReader _StreamReader = new StreamReader(Environment.CurrentDirectory + @"\Material\Provinces\" + ProvinceNum + ".txt");
+            string CoordsString;
+            string[] Coords;
+            int LastX = 0;
+            int LastY = 0;
+            while ((CoordsString = _StreamReader.ReadLine()) != null)
+            {
+                Coords = CoordsString.Split(' ');
+                if(Coords.Length == 4)
+                {
+                    AddPath(Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Convert.ToInt32(Coords[2]), Convert.ToInt32(Coords[3]), Brushes.Red);
+                    LastX = Convert.ToInt32(Coords[2]);
+                    LastY = Convert.ToInt32(Coords[3]);
+                }
+                else
+                {
+                    AddPath(LastX, LastY, Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Brushes.Red);
+                    LastX = Convert.ToInt32(Coords[0]);
+                    LastY = Convert.ToInt32(Coords[1]);
+                }
+            }
+        }
+
+        public void ClearMap()
+        {
+            MapCanvas.Children.Clear();
+            Ellipses.Clear();
+            Paths.Clear();
         }
     }
 }

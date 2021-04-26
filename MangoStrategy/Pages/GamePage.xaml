@@ -22,9 +22,15 @@
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
             <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minus" Name="MinusScrollBtn" ToolTip="Minus"/>
-            <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Minimum="25" Maximum="200"/>
+            <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Name="MapSlider" Minimum="25" Maximum="300"/>
             <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
             <TextBlock Name="XYMousePosTextBlock" Text="Click to set new position."/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button Content="&#xE103;" Style="{StaticResource TabBarBtnLight}" Tag="PauseTime" Click="Button_Click" Name="PauseTimeBtn" FontSize="18"/>
+            <Button Content="&#xE102;" Style="{StaticResource TabBarBtnLight}" Tag="NormalTime" Click="Button_Click" Name="NormalTimeBtn"/>
+            <Button Content="&#xE101;" Style="{StaticResource TabBarBtnLight}" Tag="ExtraTime" Click="Button_Click" Name="ExtraTimeBtn"/>
+            <TextBlock Name="TimeTextBlock" Text="0:00 1.01.2000"/>
         </StackPanel>
     </Grid>
 </Page>

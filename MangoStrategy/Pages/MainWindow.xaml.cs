@@ -35,6 +35,11 @@ namespace MangoStrategy
             // a
         }
 
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
         void SettingsApply()
         {
             ChangeTheme();
