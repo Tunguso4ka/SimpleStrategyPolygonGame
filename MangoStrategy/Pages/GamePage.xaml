@@ -10,27 +10,32 @@
       Title="GamePage">
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0, 20, 0, 0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0, 20, 0, 0">
             <Viewbox Name="MapViewbox" Stretch="Fill" MouseDown="MapViewbox_MouseDown">
                 <Grid>
+                    <!--
                     <Image Name="MapImage" Source="/Material/Europe.png" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    -->
                     <Canvas x:Name="MapCanvas" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top">
                         
                     </Canvas>
                 </Grid>
             </Viewbox>
         </ScrollViewer>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minus" Name="MinusScrollBtn" ToolTip="Minus"/>
-            <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Name="MapSlider" Minimum="25" Maximum="300"/>
-            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
-            <TextBlock Name="XYMousePosTextBlock" Text="Click to set new position."/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button Content="&#xE103;" Style="{StaticResource TabBarBtnLight}" Tag="PauseTime" Click="Button_Click" Name="PauseTimeBtn" FontSize="18"/>
-            <Button Content="&#xE102;" Style="{StaticResource TabBarBtnLight}" Tag="NormalTime" Click="Button_Click" Name="NormalTimeBtn"/>
-            <Button Content="&#xE101;" Style="{StaticResource TabBarBtnLight}" Tag="ExtraTime" Click="Button_Click" Name="ExtraTimeBtn"/>
-            <TextBlock Name="TimeTextBlock" Text="0:00 1.01.2000"/>
-        </StackPanel>
+        <Grid VerticalAlignment="Top" Background="White">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minus" Name="MinusScrollBtn" ToolTip="Minus"/>
+                <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Name="MapSlider" Minimum="25" Maximum="300"/>
+                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
+                <TextBlock Text="X: Y: "/>
+                <TextBox Name="XYMPTextBox" Text="" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="&#xE103;" Style="{StaticResource TabBarBtnLight}" Tag="PauseTime" Click="Button_Click" Name="PauseTimeBtn" FontSize="18"/>
+                <Button Content="&#xE102;" Style="{StaticResource TabBarBtnLight}" Tag="NormalTime" Click="Button_Click" Name="NormalTimeBtn"/>
+                <Button Content="&#xE101;" Style="{StaticResource TabBarBtnLight}" Tag="ExtraTime" Click="Button_Click" Name="ExtraTimeBtn"/>
+                <TextBlock Name="TimeTextBlock" Text="0:00 1.01.2000"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

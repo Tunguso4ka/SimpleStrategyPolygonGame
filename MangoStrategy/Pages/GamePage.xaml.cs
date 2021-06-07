@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MangoStrategy
@@ -32,7 +26,7 @@ namespace MangoStrategy
         {
             InitializeComponent();
             _this = Recived_this;
-            LoadProvince(0);
+            LoadMap();
             GameTime();
         }
 
@@ -158,7 +152,7 @@ namespace MangoStrategy
         private void MapViewbox_MouseDown(object sender, MouseButtonEventArgs e)
         {
             _Point = e.GetPosition(MapCanvas);
-            XYMousePosTextBlock.Text = " _Point X:" + _Point.X + " Y:" + _Point.Y;
+            XYMPTextBox.Text = Convert.ToInt32(_Point.X) + " " + Convert.ToInt32(_Point.Y);
         }
 
         public async void AddCityByClick(Brush CountryBrush)
@@ -209,12 +203,16 @@ namespace MangoStrategy
             string[] Coords;
             int LastX = 0;
             int LastY = 0;
+            int FirstX = 0;
+            int FirstY = 0;
             while ((CoordsString = _StreamReader.ReadLine()) != null)
             {
                 Coords = CoordsString.Split(' ');
                 if(Coords.Length == 4)
                 {
                     AddPath(Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Convert.ToInt32(Coords[2]), Convert.ToInt32(Coords[3]), Brushes.Red);
+                    FirstX = Convert.ToInt32(Coords[0]);
+                    FirstY = Convert.ToInt32(Coords[1]);
                     LastX = Convert.ToInt32(Coords[2]);
                     LastY = Convert.ToInt32(Coords[3]);
                 }
@@ -225,6 +223,8 @@ namespace MangoStrategy
                     LastY = Convert.ToInt32(Coords[1]);
                 }
             }
+            AddPath(LastX, LastY, FirstX, FirstY, Brushes.Red);
+            _StreamReader.Dispose();
         }
 
         public void ClearMap()
@@ -232,6 +232,17 @@ namespace MangoStrategy
             MapCanvas.Children.Clear();
             Ellipses.Clear();
             Paths.Clear();
+        }
+
+        public void LoadMap()
+        {
+            StreamReader _StreamReader = new StreamReader(Environment.CurrentDirectory + @"\Material\Provinces\Provinces.txt");
+            string Numstring;
+            while ((Numstring = _StreamReader.ReadLine()) != null)
+            {
+                LoadProvince(Convert.ToInt32(Numstring));
+            }
+            _StreamReader.Dispose();
         }
     }
 }

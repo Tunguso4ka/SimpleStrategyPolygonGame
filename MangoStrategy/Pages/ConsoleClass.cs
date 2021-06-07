@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -99,9 +95,9 @@ namespace MangoStrategy
             {
                 if (ConsoleRequest.Length == 1)
                 {
-                    RecMainWindow.ConsoleTextBox.Text = "Variants: Help App;";
+                    RecMainWindow.ConsoleTextBox.Text = "Variants: Help App; Map;";
                 }
-                else if (ConsoleRequest[1].Equals("App; Map;", StringComparison.OrdinalIgnoreCase))
+                else if (ConsoleRequest[1].Equals("App", StringComparison.OrdinalIgnoreCase))
                 {
                     
                     RecMainWindow.ConsoleTextBox.Text = "Variants: App Darkmode (t/f); App Restart; App Exit;";
@@ -139,7 +135,6 @@ namespace MangoStrategy
                         RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
                     }
                 }
-
                 else if (ConsoleRequest[1].Equals("AddCityByClick", StringComparison.OrdinalIgnoreCase))
                 {
                     if (ConsoleRequest.Length > 2)
@@ -163,7 +158,6 @@ namespace MangoStrategy
                         RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
                     }
                 }
-
                 else if (ConsoleRequest[1].Equals("AddPathByClick", StringComparison.OrdinalIgnoreCase))
                 {
                     if (ConsoleRequest.Length > 2)
@@ -200,6 +194,29 @@ namespace MangoStrategy
                     }
                 }
 
+                else if (ConsoleRequest[1].Equals("LoadMap", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ConsoleRequest.Length > 1)
+                    {
+                        RecMainWindow._GamePage.LoadMap();
+                    }
+                    else
+                    {
+                        RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
+                    }
+                }
+                else if (ConsoleRequest[1].Equals("ReloadMap", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ConsoleRequest.Length > 1)
+                    {
+                        RecMainWindow._GamePage.ClearMap();
+                        RecMainWindow._GamePage.LoadMap();
+                    }
+                    else
+                    {
+                        RecMainWindow.ConsoleTextBox.Text = "Error: You need add more properties.";
+                    }
+                }
                 else if (ConsoleRequest[1].Equals("ClearMap", StringComparison.OrdinalIgnoreCase))
                 {
                     if (ConsoleRequest.Length > 1)

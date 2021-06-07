@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MangoStrategy"
         mc:Ignorable="d"
+        
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
+        StateChanged="Window_StateChanged"
+        Title="Game"
         
-        Title="MainWindow"
         MinHeight="720"
         MinWidth="1280"
         Height="720"
         Width="1280"
         MaxHeight="1440"
         MaxWidth="2160"
+        
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
     <Grid>
