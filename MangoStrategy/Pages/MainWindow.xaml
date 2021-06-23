@@ -21,27 +21,33 @@
         
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
-    <Grid>
-        <Grid Name="TabBar" Height="20" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Back" Name="BackBtn" ToolTip="Back"/>
-                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="ShowConsole" Name="ShowConsoleBtn" ToolTip="Show Console"/>
-                <Grid Width="500" Name="ConsoleGrid" Visibility="Visible">
-                    <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="TabConsole" Name="TabConsoleBtn" HorizontalAlignment="Left" ToolTip="Tab"/>
-                    <TextBox HorizontalAlignment="Stretch" Name="ConsoleTextBox" Margin="30, 0, 30, 0"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="ClearConsole" Name="ClearConsoleBtn" HorizontalAlignment="Left" ToolTip="Clear Console"/>
-                        <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="EnterConsole" Name="EnterConsoleBtn" HorizontalAlignment="Left" ToolTip="Enter Console"/>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Info" Name="InfoBtn" ToolTip="Info"/>
-                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minimize" Name="MiniBtn" ToolTip="Minimize"/>
-                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Maximize" Name="MaxiBtn" ToolTip="Maximize"/>
-                <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Close" Name="CloseBtn" ToolTip="Close"/>
-            </StackPanel>
+    <WindowChrome.WindowChrome>
+        <WindowChrome NonClientFrameEdges="None" GlassFrameThickness="5" ResizeBorderThickness="5" CaptionHeight="0">
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+    <Border BorderThickness="5" BorderBrush="Black">
+        <Grid>
+            <Grid Name="TabBar" Height="20" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="&#xF0D5;" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Back" Name="BackBtn" ToolTip="Back"/>
+                    <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="ShowConsole" Name="ShowConsoleBtn" ToolTip="Show Console"/>
+                    <Grid Width="500" Name="ConsoleGrid" Visibility="Collapsed">
+                        <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="TabConsole" Name="TabConsoleBtn" HorizontalAlignment="Left" ToolTip="Tab"/>
+                        <TextBox HorizontalAlignment="Stretch" Name="ConsoleTextBox" Margin="30, 0, 30, 0"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="ClearConsole" Name="ClearConsoleBtn" HorizontalAlignment="Left" ToolTip="Clear Console"/>
+                            <Button Content="&#xEB97;" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="EnterConsole" Name="EnterConsoleBtn" HorizontalAlignment="Left" ToolTip="Enter Console"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Info" Name="InfoBtn" ToolTip="Info" Visibility="Collapsed"/>
+                    <Button Content="&#xEF2D;" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minimize" Name="MiniBtn" ToolTip="Minimize"/>
+                    <Button Content="&#xF0D8;" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Maximize" Name="MaxiBtn" ToolTip="Maximize"/>
+                    <Button Content="&#xEF2C;" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Close" Name="CloseBtn" ToolTip="Close"/>
+                </StackPanel>
+            </Grid>
+            <Frame Name="Frame0" Margin="0,20,0,0"/>
         </Grid>
-        <Frame Name="Frame0" Margin="0,20,0,0"/>
-    </Grid>
+    </Border>
 </Window>
