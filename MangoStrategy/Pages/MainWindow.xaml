@@ -8,7 +8,7 @@
         
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="CanResize"
         StateChanged="Window_StateChanged"
         Title="Game"
         
@@ -22,7 +22,7 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
     <WindowChrome.WindowChrome>
-        <WindowChrome NonClientFrameEdges="None" GlassFrameThickness="5" ResizeBorderThickness="5" CaptionHeight="0">
+        <WindowChrome NonClientFrameEdges="None" GlassFrameThickness="2.5" ResizeBorderThickness="2.5" CaptionHeight="0">
         </WindowChrome>
     </WindowChrome.WindowChrome>
     <Border BorderThickness="5" BorderBrush="Black">
@@ -47,7 +47,7 @@
                     <Button Content="&#xEF2C;" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Close" Name="CloseBtn" ToolTip="Close"/>
                 </StackPanel>
             </Grid>
-            <Frame Name="Frame0" Margin="0,20,0,0"/>
+            <Frame Name="Frame0" Margin="5,20,5,5"/>
         </Grid>
     </Border>
 </Window>

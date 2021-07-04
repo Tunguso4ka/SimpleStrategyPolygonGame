@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="MapCellClass.cs" />
     <Compile Include="Pages\ConsoleClass.cs" />
     <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
@@ -131,21 +132,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Material\Europe_polar_stereographic_Caucasus_Urals_boundary.svg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Material\Europe_polar_stereographic_Caucasus_Urals_boundary.svg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Material\europe.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Material\Country\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Material\Provinces\0.txt" />
+    <Folder Include="Material\Provinces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

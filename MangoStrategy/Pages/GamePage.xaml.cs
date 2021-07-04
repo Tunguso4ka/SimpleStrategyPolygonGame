@@ -15,8 +15,7 @@ namespace MangoStrategy
     /// </summary>
     public partial class GamePage : Page
     {
-        List<Ellipse> Ellipses = new List<Ellipse>();
-        List<System.Windows.Shapes.Path> Paths = new List<System.Windows.Shapes.Path>();
+        Rectangle[] RectangleList = new Rectangle[800];
         MainWindow _this;
         Point _Point;
         int TimeMode = -1;
@@ -26,8 +25,8 @@ namespace MangoStrategy
         {
             InitializeComponent();
             _this = Recived_this;
-            LoadMap();
             GameTime();
+            MakeMap();
         }
 
         public async void GameTime()
@@ -69,6 +68,11 @@ namespace MangoStrategy
             }
         }
 
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button ClickedButton = (Button)sender;
@@ -87,6 +91,7 @@ namespace MangoStrategy
                 }
             }
 
+            //Time
             else if ((string)ClickedButton.Tag == "PauseTime")
             {
                 ExtraTimeBtn.FontSize = 12;
@@ -108,141 +113,71 @@ namespace MangoStrategy
                 PauseTimeBtn.FontSize = 12;
                 TimeMode = 1;
             }
-        }
 
-        public void AddCity(int X, int Y, Brush CountryBrush)
-        {
-            Ellipse _Ellipse = new Ellipse();
-            _Ellipse.Fill = CountryBrush;
-            _Ellipse.Width = 15;
-            _Ellipse.Height = 15;
-            Canvas.SetLeft(_Ellipse, X);
-            Canvas.SetTop(_Ellipse, Y);
+            //Menu buttons
+            else if ((string)ClickedButton.Tag == "HideMenu")
+            {
+                if(FrameMenu.Visibility == Visibility.Visible)
+                {
+                    FrameMenu.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
 
-            MapCanvas.Children.Add(_Ellipse);
+                    FrameMenu.Visibility = Visibility.Visible;
+                }
+            }
+            else if ((string)ClickedButton.Tag == "ResearchesMenu")
+            {
+                
+            }
+            else if ((string)ClickedButton.Tag == "DiplomaticMenu")
+            {
+                
+            }
+            else if ((string)ClickedButton.Tag == "LawsMenu")
+            {
 
-            Ellipses.Add(_Ellipse);
-
-            _this.ConsoleTextBox.Text = "New City added in X: " + Convert.ToString(X) + " Y: " + Convert.ToString(Y);
+            }
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider _Slider = (Slider)sender;
 
-            MapViewbox.Height = 23 * _Slider.Value;
-            MapViewbox.Width = 35 * _Slider.Value;
+            MapViewbox.Height = 9 * _Slider.Value;
+            MapViewbox.Width = 16 * _Slider.Value;
+        }
 
-            MapCanvas.Children.Clear();
-            
-            for (int i = 0; i < Ellipses.Count; i++)
-            {
-                Ellipse _Ellipse = Ellipses[i];
-                _Ellipse.Height = 0.2 * _Slider.Value;
-                _Ellipse.Width = 0.2 * _Slider.Value;
-                MapCanvas.Children.Add(_Ellipse);
-            }
-            for (int i = 0; i < Paths.Count; i++)
-            {
-                System.Windows.Shapes.Path _Path = Paths[i];
-                MapCanvas.Children.Add(_Path);
-            }
+        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Rectangle _Rectangle = (Rectangle)sender;
+            RectTagTextBox.Text = Convert.ToString(_Rectangle.Tag);
         }
 
         private void MapViewbox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            _Point = e.GetPosition(MapCanvas);
+            _Point = e.GetPosition(MapViewbox);
             XYMPTextBox.Text = Convert.ToInt32(_Point.X) + " " + Convert.ToInt32(_Point.Y);
         }
 
-        public async void AddCityByClick(Brush CountryBrush)
+
+        void MakeMap()
         {
-            int i = 500;
-            while(i != 0)
+            int i = 0;
+            while (i != 800)
             {
-                await Task.Delay(10);
-                _this.ConsoleTextBox.Text = "Click on Map. Time: " + Convert.ToString(i) + " X:" + _Point.X + " Y:" + _Point.Y;
-                i--;
+                Rectangle NewRectangle = new Rectangle();
+                NewRectangle.Width = 50;
+                NewRectangle.Height = 50;
+                NewRectangle.Fill = Brushes.DeepSkyBlue;
+                NewRectangle.Stroke = Brushes.SkyBlue;
+                NewRectangle.Tag = i;
+                NewRectangle.MouseDown += Rectangle_MouseDown;
+                MapWrapPanel.Children.Add(NewRectangle);
+                RectangleList[i] = NewRectangle;
+                i += 1;
             }
-
-            AddCity((int)_Point.X, (int)_Point.Y, CountryBrush);
-        }
-
-        public async void AddPathByClick(Brush CountryBrush)
-        {
-            int i = 500;
-            while (i != 0)
-            {
-                await Task.Delay(10);
-                _this.ConsoleTextBox.Text = "Click on Map. Time: " + Convert.ToString(i) + " X:" + _Point.X + " Y:" + _Point.Y;
-                i--;
-            }
-
-            //AddPath((int)_Point.X, (int)_Point.Y, CountryBrush);
-        }
-
-        public void AddPath(int X0, int Y0, int X1, int Y1, Brush CountryBrush)
-        {
-            System.Windows.Shapes.Path _Path = new System.Windows.Shapes.Path();
-            _Path.Stroke = CountryBrush;
-            _Path.StrokeThickness = 2;
-            Geometry _Geometry = Geometry.Parse("M " + Convert.ToString(X0) + "," + Convert.ToString(Y0) + " " + Convert.ToString(X1) + "," + Convert.ToString(Y1));
-            _Path.Data = _Geometry;
-
-            MapCanvas.Children.Add(_Path);
-
-            Paths.Add(_Path);
-
-            _this.ConsoleTextBox.Text = "Map AddPath " + Convert.ToString(X1) + " " + Convert.ToString(Y1);
-        }
-
-        public async void LoadProvince(int ProvinceNum)
-        {
-            StreamReader _StreamReader = new StreamReader(Environment.CurrentDirectory + @"\Material\Provinces\" + ProvinceNum + ".txt");
-            string CoordsString;
-            string[] Coords;
-            int LastX = 0;
-            int LastY = 0;
-            int FirstX = 0;
-            int FirstY = 0;
-            while ((CoordsString = _StreamReader.ReadLine()) != null)
-            {
-                Coords = CoordsString.Split(' ');
-                if(Coords.Length == 4)
-                {
-                    AddPath(Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Convert.ToInt32(Coords[2]), Convert.ToInt32(Coords[3]), Brushes.Red);
-                    FirstX = Convert.ToInt32(Coords[0]);
-                    FirstY = Convert.ToInt32(Coords[1]);
-                    LastX = Convert.ToInt32(Coords[2]);
-                    LastY = Convert.ToInt32(Coords[3]);
-                }
-                else
-                {
-                    AddPath(LastX, LastY, Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Brushes.Red);
-                    LastX = Convert.ToInt32(Coords[0]);
-                    LastY = Convert.ToInt32(Coords[1]);
-                }
-            }
-            AddPath(LastX, LastY, FirstX, FirstY, Brushes.Red);
-            _StreamReader.Dispose();
-        }
-
-        public void ClearMap()
-        {
-            MapCanvas.Children.Clear();
-            Ellipses.Clear();
-            Paths.Clear();
-        }
-
-        public void LoadMap()
-        {
-            StreamReader _StreamReader = new StreamReader(Environment.CurrentDirectory + @"\Material\Provinces\Provinces.txt");
-            string Numstring;
-            while ((Numstring = _StreamReader.ReadLine()) != null)
-            {
-                LoadProvince(Convert.ToInt32(Numstring));
-            }
-            _StreamReader.Dispose();
         }
     }
 }
