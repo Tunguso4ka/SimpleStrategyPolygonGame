@@ -115,6 +115,6 @@
         <Style x:Key="RadioButtonDark" TargetType="RadioButton">
             <Setter Property="Foreground" Value="White"/>
         </Style>
-
+        
     </Application.Resources>
 </Application>
