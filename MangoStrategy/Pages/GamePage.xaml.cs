@@ -181,12 +181,12 @@ namespace MangoStrategy
             //AddPath((int)_Point.X, (int)_Point.Y, CountryBrush);
         }
 
-        public void AddPath(int X0, int Y0, int X1, int Y1, Brush CountryBrush)
+        public void AddPath(double X0, double Y0, double X1, double Y1, Brush CountryBrush)
         {
             System.Windows.Shapes.Path _Path = new System.Windows.Shapes.Path();
             _Path.Stroke = CountryBrush;
             _Path.StrokeThickness = 2;
-            Geometry _Geometry = Geometry.Parse("M " + Convert.ToString(X0) + "," + Convert.ToString(Y0) + " " + Convert.ToString(X1) + "," + Convert.ToString(Y1));
+            Geometry _Geometry = Geometry.Parse("M " + Convert.ToString(Convert.ToInt32(X0)) + "," + Convert.ToString(Convert.ToInt32(Y0)) + " " + Convert.ToString(Convert.ToInt32(X1)) + "," + Convert.ToString(Convert.ToInt32(Y1)));
             _Path.Data = _Geometry;
 
             MapCanvas.Children.Add(_Path);
@@ -196,31 +196,31 @@ namespace MangoStrategy
             _this.ConsoleTextBox.Text = "Map AddPath " + Convert.ToString(X1) + " " + Convert.ToString(Y1);
         }
 
-        public async void LoadProvince(int ProvinceNum)
+        public void LoadProvince(int ProvinceNum)
         {
             StreamReader _StreamReader = new StreamReader(Environment.CurrentDirectory + @"\Material\Provinces\" + ProvinceNum + ".txt");
             string CoordsString;
             string[] Coords;
-            int LastX = 0;
-            int LastY = 0;
-            int FirstX = 0;
-            int FirstY = 0;
+            double LastX = 0;
+            double LastY = 0;
+            double FirstX = 0;
+            double FirstY = 0;
             while ((CoordsString = _StreamReader.ReadLine()) != null)
             {
                 Coords = CoordsString.Split(' ');
                 if(Coords.Length == 4)
                 {
-                    AddPath(Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Convert.ToInt32(Coords[2]), Convert.ToInt32(Coords[3]), Brushes.Red);
-                    FirstX = Convert.ToInt32(Coords[0]);
-                    FirstY = Convert.ToInt32(Coords[1]);
-                    LastX = Convert.ToInt32(Coords[2]);
-                    LastY = Convert.ToInt32(Coords[3]);
+                    AddPath(Convert.ToDouble(Coords[0]), Convert.ToDouble(Coords[1]), Convert.ToDouble(Coords[2]), Convert.ToDouble(Coords[3]), Brushes.Red);
+                    FirstX = Convert.ToDouble(Coords[0]);
+                    FirstY = Convert.ToDouble(Coords[1]);
+                    LastX = Convert.ToDouble(Coords[2]);
+                    LastY = Convert.ToDouble(Coords[3]);
                 }
                 else
                 {
-                    AddPath(LastX, LastY, Convert.ToInt32(Coords[0]), Convert.ToInt32(Coords[1]), Brushes.Red);
-                    LastX = Convert.ToInt32(Coords[0]);
-                    LastY = Convert.ToInt32(Coords[1]);
+                    AddPath(LastX, LastY, Convert.ToDouble(Coords[0]), Convert.ToDouble(Coords[1]), Brushes.Red);
+                    LastX = Convert.ToDouble(Coords[0]);
+                    LastY = Convert.ToDouble(Coords[1]);
                 }
             }
             AddPath(LastX, LastY, FirstX, FirstY, Brushes.Red);

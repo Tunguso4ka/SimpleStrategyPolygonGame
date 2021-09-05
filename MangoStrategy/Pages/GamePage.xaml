@@ -14,9 +14,9 @@
             <Viewbox Name="MapViewbox" Stretch="Fill" MouseDown="MapViewbox_MouseDown">
                 <Grid>
                     <!--
-                    <Image Name="MapImage" Source="/Material/Europe.png" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Image Name="MapImage" Source="/Material/Europe.png" Width="15360" Height="8640" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     -->
-                    <Canvas x:Name="MapCanvas" Width="3555" Height="2319" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Canvas x:Name="MapCanvas" Width="15360" Height="8640" HorizontalAlignment="Left" VerticalAlignment="Top">
                         
                     </Canvas>
                 </Grid>
@@ -25,7 +25,7 @@
         <Grid VerticalAlignment="Top" Background="White">
             <StackPanel Orientation="Horizontal">
                 <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Minus" Name="MinusScrollBtn" ToolTip="Minus"/>
-                <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Name="MapSlider" Minimum="25" Maximum="300"/>
+                <Slider Value="100" Width="500" ValueChanged="Slider_ValueChanged" Name="MapSlider" Minimum="25" Maximum="500"/>
                 <Button Content="" Style="{StaticResource TabBarBtnLight}" Click="Button_Click" Tag="Plus" Name="PlusScrollBtn" ToolTip="Plus"/>
                 <TextBlock Text="X: Y: "/>
                 <TextBox Name="XYMPTextBox" Text="" Width="100"/>

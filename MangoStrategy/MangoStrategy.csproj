@@ -147,5 +147,16 @@
   <ItemGroup>
     <Resource Include="Material\Provinces\0.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Material\Provinces\1.txt" />
+    <Resource Include="Material\Provinces\2.txt" />
+    <Resource Include="Material\Provinces\3.txt" />
+    <Resource Include="Material\Provinces\4.txt" />
+    <Resource Include="Material\Provinces\5.txt" />
+    <Resource Include="Material\Provinces\6.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Material\Provinces\Provinces.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

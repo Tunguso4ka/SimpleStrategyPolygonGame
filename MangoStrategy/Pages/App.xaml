@@ -8,8 +8,8 @@
         
         <Style x:Key="TabBarBtnLight" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="45"/>
             <Setter Property="Foreground" Value="DimGray"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>

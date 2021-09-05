@@ -79,13 +79,13 @@ namespace MangoStrategy
                 if (this.WindowState == WindowState.Maximized)
                 {
                     this.WindowState = WindowState.Normal;
-                    MaxiBtn.Content = "";
+                    MaxiBtn.Content = "";
                 }
                 else
                 {
                     this.WindowStyle = WindowStyle.SingleBorderWindow;
                     this.WindowState = WindowState.Maximized;
-                    MaxiBtn.Content = "";
+                    MaxiBtn.Content = "";
                     this.WindowStyle = WindowStyle.None;
                 }
             }
@@ -141,7 +141,7 @@ namespace MangoStrategy
             {
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
                 this.WindowState = WindowState.Maximized;
-                MaxiBtn.Content = "";
+                MaxiBtn.Content = "";
                 this.WindowStyle = WindowStyle.None;
             }
         }
